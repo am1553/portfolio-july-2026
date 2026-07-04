@@ -1,0 +1,317 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(4.5rem, 12vh, 8rem) clamp(4rem, 10vh, 7rem);
+  border-bottom: 1px solid var(--line);
+}
+
+/* ==========================================================================
+   Grid + beams — one masked layer so both fade before the fold
+   ========================================================================== */
+
+.gridLayer {
+  --gs: 72px; /* grid cell size */
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--line) 55%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--line) 55%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: var(--gs) var(--gs);
+  background-position: 0 0; /* beams align to line coordinates */
+  mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+}
+
+.beam {
+  --beam-c: var(--cobalt);
+  position: absolute;
+  border-radius: 999px;
+}
+
+/* vertical beams — sit exactly on a vertical grid line, travel downward */
+.beamV {
+  top: 0;
+  width: 1px;
+  height: 130px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--beam-c) 75%, transparent),
+    transparent
+  );
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--beam-c) 25%, transparent);
+  animation: beam-down 7s linear infinite;
+}
+
+.beamV1 {
+  left: calc(var(--gs) * 3);
+  animation-duration: 7.5s;
+}
+
+.beamV2 {
+  left: calc(var(--gs) * 9);
+  animation-delay: -3.2s;
+  animation-duration: 9s;
+  --beam-c: var(--signal);
+}
+
+.beamV3 {
+  left: calc(var(--gs) * 15);
+  animation-delay: -5.6s;
+  animation-duration: 8s;
+  --beam-c: var(--violet);
+}
+
+/* horizontal beams — travel along a horizontal grid line, left to right */
+.beamH {
+  left: 0;
+  height: 1px;
+  width: 160px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--beam-c) 65%, transparent),
+    transparent
+  );
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--beam-c) 20%, transparent);
+  animation: beam-across 11s linear infinite;
+}
+
+.beamH1 {
+  top: calc(var(--gs) * 2);
+  animation-delay: -2s;
+  --beam-c: var(--amber);
+}
+
+.beamH2 {
+  top: calc(var(--gs) * 5);
+  animation-delay: -7.5s;
+  animation-duration: 13s;
+}
+
+@keyframes beam-down {
+  from {
+    transform: translateY(-140px);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes beam-across {
+  from {
+    transform: translateX(-170px);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  font-size: var(--text-hero);
+  margin-top: 1.1rem;
+  max-width: 16ch;
+}
+
+.titleAccent {
+  color: var(--cobalt);
+}
+
+.lead {
+  margin-top: 1.6rem;
+  max-width: 54ch;
+  font-size: var(--text-lg);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2.2rem;
+}
+
+.primaryCta,
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s var(--ease-out);
+}
+
+.primaryCta {
+  background: var(--cobalt);
+  color: #fff;
+}
+
+.primaryCta:hover {
+  background: var(--cobalt-deep);
+  transform: translateY(-1px);
+}
+
+.secondaryCta {
+  border: 1px solid var(--line);
+  background: var(--paper-raised);
+  color: var(--ink);
+}
+
+.secondaryCta:hover {
+  border-color: var(--cobalt);
+  color: var(--cobalt);
+}
+
+/* ==========================================================================
+   Request path — the signature
+   ========================================================================== */
+
+.path {
+  width: 100%;
+  max-width: 720px;
+  margin-top: clamp(3.2rem, 8vh, 5rem);
+}
+
+.pathTrack {
+  position: relative;
+  height: 2px;
+  margin-inline: 7px; /* wire spans between first/last port centres */
+}
+
+.pathWire {
+  position: absolute;
+  inset: 0;
+  background: var(--line);
+}
+
+.pathPulse {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 84px;
+  height: 2px;
+  transform: translate(-100%, -50%);
+  background: linear-gradient(90deg, transparent, var(--cobalt));
+  animation: request 4.5s var(--ease-out) infinite;
+}
+
+/* out (request, cobalt) then back (response, green) */
+@keyframes request {
+  0% {
+    left: 0;
+    transform: translate(-100%, -50%) scaleX(1);
+    background: linear-gradient(90deg, transparent, var(--cobalt));
+  }
+  38% {
+    left: 100%;
+    transform: translate(0%, -50%) scaleX(1);
+    background: linear-gradient(90deg, transparent, var(--cobalt));
+  }
+  42% {
+    left: 100%;
+    transform: translate(0%, -50%) scaleX(-1);
+    background: linear-gradient(90deg, transparent, var(--signal));
+  }
+  80%,
+  100% {
+    left: 0;
+    transform: translate(-100%, -50%) scaleX(-1);
+    background: linear-gradient(90deg, transparent, var(--signal));
+  }
+}
+
+.pathNodes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -8px; /* pulls ports up onto the wire */
+}
+
+.pathNode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  text-align: center;
+}
+
+.pathNode:first-child {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.pathNode:last-child {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.pathPort {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  margin-bottom: 0.6rem;
+}
+
+.pathLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pathSub {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-faint);
+}
+
+.pathCaption {
+  margin-top: 1.5rem;
+  font-size: var(--text-sm);
+  color: var(--ink-faint);
+}
+
+.pathCaption code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--signal);
+  background: color-mix(in srgb, var(--signal) 10%, transparent);
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+}
+
+@media (max-width: 540px) {
+  .pathSub {
+    display: none;
+  }
+}

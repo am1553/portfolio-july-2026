@@ -1,0 +1,25 @@
+.footer {
+  border-top: 1px solid var(--line);
+  padding-block: 1.6rem;
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-faint);
+}
+
+.built a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.built a:hover {
+  color: var(--cobalt);
+  border-bottom-color: currentColor;
+}

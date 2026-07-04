@@ -1,0 +1,164 @@
+.header h2 {
+  margin: 0.9rem 0 1.2rem;
+}
+
+.header {
+  /* anchor offset for the sticky header */
+  scroll-margin-top: 76px;
+}
+
+.intro {
+  max-width: 58ch;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out),
+    border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow);
+  border-color: color-mix(in srgb, var(--cobalt) 35%, var(--line));
+}
+
+/* 7 cards: 1 full-width + 3 rows of 2 = no orphan */
+.featured {
+  grid-column: span 2;
+}
+
+.featured .mediaImg {
+  aspect-ratio: 21 / 9;
+}
+
+.media {
+  display: block;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.mediaImg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.card:hover .mediaImg {
+  transform: scale(1.015);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1.4rem 1.5rem 1.6rem;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 110;
+  font-weight: 700;
+  font-size: var(--text-xl);
+  letter-spacing: -0.015em;
+}
+
+/* layer map — filled chip = layer built on this project */
+.layerMap {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.layer {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.18em 0.55em;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  color: var(--ink-faint);
+}
+
+.layerOn {
+  border-color: var(--cobalt);
+  background: color-mix(in srgb, var(--cobalt) 8%, transparent);
+  color: var(--cobalt);
+  font-weight: 600;
+}
+
+.description {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.stack {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-faint);
+}
+
+.links {
+  display: flex;
+  gap: 1.3rem;
+  margin-top: 0.2rem;
+}
+
+.links a {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--cobalt);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.links a:hover {
+  color: var(--cobalt-deep);
+  border-bottom-color: currentColor;
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured {
+    grid-column: auto;
+  }
+
+  .featured .mediaImg {
+    aspect-ratio: 16 / 10;
+  }
+}

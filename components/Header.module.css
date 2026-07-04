@@ -23,6 +23,8 @@
   text-decoration: none;
   letter-spacing: -0.02em;
   white-space: nowrap;
+  position: relative;
+  z-index: 2; /* stays above the mobile panel */
 }
 
 .wordmarkAccent {
@@ -75,18 +77,137 @@
   }
 }
 
-@media (max-width: 860px) {
+/* ==========================================================================
+   Hamburger button (hidden on desktop)
+   ========================================================================== */
+
+.menuButton {
+  display: none;
+  position: relative;
+  z-index: 2;
+  width: 42px;
+  height: 42px;
+  margin-right: -8px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menuBar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--ink);
+  transition:
+    transform 0.25s var(--ease-out),
+    opacity 0.2s ease;
+}
+
+/* hamburger → X */
+.menuButtonOpen .menuBar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menuButtonOpen .menuBar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0.4);
+}
+
+.menuButtonOpen .menuBar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   Mobile panel (hidden on desktop)
+   ========================================================================== */
+
+.mobileNav {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .desktopNav,
   .status {
     display: none;
   }
-}
 
-@media (max-width: 560px) {
-  .nav {
-    gap: 0.8rem;
+  .menuButton {
+    display: flex;
   }
 
-  .nav a {
+  .mobileNav {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: color-mix(in srgb, var(--paper) 94%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+    padding: 0.6rem var(--gutter) 1.4rem;
+    /* closed state */
+    opacity: 0;
+    transform: translateY(-8px);
+    visibility: hidden;
+    transition:
+      opacity 0.22s ease,
+      transform 0.25s var(--ease-out),
+      visibility 0s linear 0.25s;
+  }
+
+  .mobileNavOpen {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+    transition:
+      opacity 0.22s ease,
+      transform 0.25s var(--ease-out);
+  }
+
+  .mobileList li {
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s var(--ease-out);
+  }
+
+  .mobileNavOpen .mobileList li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobileList a {
+    display: block;
+    padding: 0.75rem 0;
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 110;
+    font-weight: 650;
+    font-size: var(--text-lg);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    transition: color 0.15s ease;
+  }
+
+  .mobileList a:hover {
+    color: var(--cobalt);
+  }
+
+  .mobileStatus {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.1rem;
+    font-family: var(--font-mono);
     font-size: var(--text-xs);
+    color: var(--ink-soft);
   }
 }

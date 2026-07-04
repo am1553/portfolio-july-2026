@@ -29,9 +29,23 @@ export type Project = {
   code?: string;
   live?: string;
   featured?: boolean;
+  badge?: string;
 };
 
 export const projects: Project[] = [
+  {
+    title: "Issue Reporting System",
+    badge: "In progress",
+    featured: true,
+    description:
+      "BSc capstone — a full-stack issue tracker for small organisations. React + TypeScript, Express, PostgreSQL, JWT auth, OWASP-aligned validation, evaluated against WCAG 2.2 AA.",
+    image: "/images/capstone.svg",
+    imageAlt:
+      "Architecture diagram: React TypeScript client, Express API with validation and JWT auth, PostgreSQL database",
+    layers: ["client", "api", "db"],
+    stack: ["React", "TypeScript", "Express", "PostgreSQL", "JWT"],
+    code: "https://github.com/am1553/issue-reporting",
+  },
   {
     title: "Notes",
     featured: true,
@@ -191,4 +205,13 @@ export const about = {
     "A lot of my recent work has involved modernising legacy systems: auditing old interfaces, rebuilding inconsistent UI patterns, and turning complex product features into cleaner, maintainable code. Alongside work, I'm finishing a BSc in Computing & IT with the Open University, with modules including Software Engineering, Machine Learning, and Web & Cloud Technologies.",
     "I'm now looking for a full-stack role where I can keep growing, contribute properly to a strong engineering team, and build products with care.",
   ],
+};
+export const recommendation = {
+  quote:
+    "Aryan was a pleasure to work with. During his time in my team he helped create complex front-end drawing tools using the Google Maps API, and his inquisitive nature propelled him to solve complex problems and turn them into shipped products. I wish him all the best for the future.",
+  name: "James Heffer",
+  roleLine: "Product Manager — managed Aryan directly",
+  date: "2024-02-19",
+  dateLabel: "19 Feb 2024",
+  avatar: "/images/manager-one.jpeg",
 };

@@ -299,6 +299,7 @@
   margin-top: 1.5rem;
   font-size: var(--text-sm);
   color: var(--ink-faint);
+  text-transform: capitalize;
 }
 
 .pathCaption code {

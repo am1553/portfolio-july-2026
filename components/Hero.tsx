@@ -1,22 +1,6 @@
 import styles from "./Hero.module.css";
 import { site } from "@/lib/data";
-
-/**
- * Live circuitry layer: engineering grid + signal beams travelling
- * along the wires. Colours follow the site's signal semantics —
- * cobalt (request), green (ok), amber (warn), violet (trace).
- */
-function GridCircuit() {
-  return (
-    <div className={styles.gridLayer} aria-hidden="true">
-      <span className={`${styles.beam} ${styles.beamV} ${styles.beamV1}`} />
-      <span className={`${styles.beam} ${styles.beamV} ${styles.beamV2}`} />
-      <span className={`${styles.beam} ${styles.beamV} ${styles.beamV3}`} />
-      <span className={`${styles.beam} ${styles.beamH} ${styles.beamH1}`} />
-      <span className={`${styles.beam} ${styles.beamH} ${styles.beamH2}`} />
-    </div>
-  );
-}
+import GridCircuit from "./GridCircuit";
 
 /**
  * Signature element: the stack rendered as a live request path.
@@ -48,7 +32,7 @@ function RequestPath() {
         ))}
       </div>
       <figcaption className={styles.pathCaption}>
-        <code>200 OK</code> — every layer, one developer
+        <code>200 OK</code> every layer, one developer
       </figcaption>
     </figure>
   );

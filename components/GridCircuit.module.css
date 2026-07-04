@@ -1,0 +1,94 @@
+/* Grid + beams + reactive tiles share one masked layer,
+   so everything fades together before the fold. */
+
+.gridLayer {
+  --gs: 72px; /* keep in sync with GS in GridCircuit.tsx */
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--line) 55%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--line) 55%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: var(--gs) var(--gs);
+  background-position: 0 0;
+  mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+}
+
+/* -- reactive tiles ------------------------------------------------------ */
+
+.tiles {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-auto-rows: var(--gs);
+}
+
+.tile {
+  --glow: var(--cobalt);
+  border-radius: 6px;
+  transform: scale(1);
+  box-shadow: inset 0 0 0 0 transparent;
+  /* slow fade-out — the ghost lingers, then dissolves */
+  transition:
+    transform 1s var(--ease-out),
+    box-shadow 1s var(--ease-out);
+}
+
+.tileLit {
+  transform: scale(1.02);
+  box-shadow:
+    inset 0 0 14px -3px color-mix(in srgb, var(--glow) 14%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--glow) 16%, transparent);
+  /* slow bloom too — the line passes first, the glow catches up */
+  transition:
+    transform 0.45s ease-out,
+    box-shadow 0.45s ease-out;
+}
+
+/* -- beams (positions driven by JS) -------------------------------------- */
+
+.beams {
+  position: absolute;
+  inset: 0;
+}
+
+.beam {
+  --beam-c: var(--cobalt);
+  position: absolute;
+  border-radius: 999px;
+}
+
+.beamV {
+  top: 0;
+  width: 1px;
+  height: 150px; /* keep in sync with BEAM_LEN */
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--beam-c) 75%, transparent),
+    transparent
+  );
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--beam-c) 25%, transparent);
+}
+
+.beamH {
+  left: 0;
+  height: 1px;
+  width: 150px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--beam-c) 65%, transparent),
+    transparent
+  );
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--beam-c) 20%, transparent);
+}

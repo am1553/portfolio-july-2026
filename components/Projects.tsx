@@ -51,6 +51,7 @@ function ProjectCard({ p }: { p: Project }) {
       <div className={styles.body}>
         <div className={styles.titleRow}>
           <h3 className={styles.title}>{p.title}</h3>
+          {p.badge && <span className={styles.badge}>{p.badge}</span>}
           <LayerMap layers={p.layers} />
         </div>
 

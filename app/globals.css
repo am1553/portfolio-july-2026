@@ -20,6 +20,13 @@
   --signal: #0da678; /* "live" status — status dot, OK responses */
   --amber: #c47f17; /* warn — beam traffic */
   --violet: #7048e8; /* trace — beam traffic */
+  /* extended beam traffic palette — tuned to hold up on porcelain */
+  --cyan: #0c8599;
+  --teal: #099268;
+  --sky: #1c7ed6;
+  --rose: #d6336c;
+  --magenta: #9c36b5;
+  --orange: #d9480f;
   --card-shadow:
     0 1px 2px rgba(14, 23, 38, 0.05), 0 8px 24px -12px rgba(14, 23, 38, 0.12);
 

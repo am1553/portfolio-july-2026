@@ -1,0 +1,69 @@
+/* The one inverted moment on the page — ink panel, quiet and weighty */
+.section {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.inner {
+  max-width: 880px;
+}
+
+.label {
+  color: color-mix(in srgb, var(--paper) 55%, var(--ink));
+}
+
+.quote {
+  margin-top: 1.6rem;
+  font-family: var(--font-display);
+  font-variation-settings: "wdth" 105;
+  font-weight: 500;
+  font-size: var(--text-2xl);
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+
+.quote::before {
+  content: "\201C";
+  color: var(--cobalt);
+  filter: brightness(1.7);
+}
+.quote::after {
+  content: "\201D";
+  color: var(--cobalt);
+  filter: brightness(1.7);
+}
+
+.cite {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2.2rem;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid color-mix(in srgb, var(--paper) 25%, transparent);
+}
+
+.cite div {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+}
+.name {
+  font-weight: 600;
+}
+.role {
+  font-size: var(--text-sm);
+  color: color-mix(in srgb, var(--paper) 65%, var(--ink));
+}
+.date {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: color-mix(in srgb, var(--paper) 45%, var(--ink));
+  margin-top: 0.15rem;
+}

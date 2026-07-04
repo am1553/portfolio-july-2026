@@ -48,6 +48,17 @@
   aspect-ratio: 21 / 9;
 }
 
+.badge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--signal);
+  background: color-mix(in srgb, var(--signal) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--signal) 30%, transparent);
+  padding: 0.15em 0.6em;
+  border-radius: 999px;
+}
+
 .media {
   display: block;
   border-bottom: 1px solid var(--line);
